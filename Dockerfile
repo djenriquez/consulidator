@@ -2,7 +2,7 @@ FROM python:3-slim
 MAINTAINER DJ Enriquez <dj.enriquez@infospace.com>
 
 ENV LOG_LEVEL=INFO \
-    APP_DIR=/opt/consulere/
+    APP_DIR=/opt/consulidator/
 
 WORKDIR $APP_DIR
 COPY ./requirements.txt $APP_DIR
