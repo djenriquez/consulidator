@@ -25,11 +25,10 @@ class Consul:
 
         for line in restore_file:
             kv = line.split(':')
-            logger.debug('Key: {}, Value: {}'.format(kv[0], base64.standard_b64decode(kv[1]).decode('utf-8')))
-
             transaction_data.append({ 'KV' : { 'Verb': 'set', 'Key': kv[0], 'Value': kv[1] } })
 
-        self._upload_kv(transaction_data)
+        for x in range(0, len(transaction_data), 10):
+            self._upload_kv(transaction_data[x:x+10])
 
     def _upload_kv(self, transaction_data):
         headers = { 'X-Consul-Token': self._token } if self._token is not None else {}
